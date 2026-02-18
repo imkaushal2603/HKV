@@ -3,8 +3,8 @@
   console.log("✅ embed.js loaded");
 
   const iframe = document.createElement("iframe");
-  iframe.src = "http://localhost:5173"; // test URL, replace later
-  // iframe.src = "https://timeline-chatbot.web.app";
+  // iframe.src = "http://localhost:5173"; // test URL, replace later
+  iframe.src = "https://frontend-a7v3.onrender.com/";
   iframe.style.position = "fixed";
   iframe.style.bottom = "0";
   iframe.style.left = "0px";
