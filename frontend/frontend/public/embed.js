@@ -17,5 +17,6 @@
   iframe.style.zIndex = "9999";
   iframe.style.border = "none";
   chatContainer.appendChild(iframe);
-  document.body.appendChild(chatContainer);
+  const target = document.querySelector(".chatbot_section");
+  target.appendChild(chatContainer);
 })();
