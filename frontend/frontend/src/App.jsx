@@ -175,6 +175,7 @@ function App() {
                 onClick={() => {
                   setIsOpen(false);
                   setIsExpanded(false);
+                  window.parent.postMessage("closeChatbot", "*");
                 }}
                 title="Close Chat"
               >
