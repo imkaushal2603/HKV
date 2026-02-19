@@ -81,6 +81,8 @@ function App() {
   const formatMessage = (text) => {
     const formatted = text
       .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+      .replace(/\[.*?\]\(.*?\)/g, "")
+      .replace(/(https?:\/\/[^\s]+)/g, "")
       .replace(/(\d+\.\s)(.*?)(?=\d+\.|$)/gs, (match, num, content) => {
         return `<div class="feature-item"><div class="feature-number">${num.trim()}</div><div class="feature-text">${content.trim()}</div></div>`;
       });
