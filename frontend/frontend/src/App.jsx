@@ -62,6 +62,7 @@ function App() {
       const cleanText = (data.reply || "")
         .replace(/^\*{1,2}Message to user:\*{1,2}\s*/i, "")
         .replace(/<JSON_OUTPUT>[\s\S]*<\/JSON_OUTPUT>/gi, "")
+        .replace(/\{[\s\S]*?\}/g, "")
         .trim();
 
       setMessages((prev) => [
