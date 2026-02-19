@@ -173,12 +173,9 @@ function App() {
               <button
                 className="close-btn"
                 onClick={() => {
-                  console.log("Attempting to talk to parent...");
-                  
                   setIsOpen(false);
                   setIsExpanded(false);
-                  if (window.parent) window.parent.postMessage("closeChatbot", "*");
-                  if (window.top) window.top.postMessage("closeChatbot", "*");
+                  (window.parent || window.top).postMessage("closeChatbot", "*");
                 }}
                 title="Close Chat"
               >
