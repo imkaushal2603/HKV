@@ -45,7 +45,7 @@ function loadSystemPrompt(targetLanguage) {
       } else {
         console.warn("⚠️ chatgptPrompt.txt is EMPTY — switching to fallback prompt.");
         return `ROLE:
-        You are the official **Timeline AI Consultant** integrated into the website.
+        You are the official **HKV AI Assistant** integrated into the website.
 
         INPUTS:
         - {targetLanguage}
@@ -84,7 +84,7 @@ function loadSystemPrompt(targetLanguage) {
         3. Match topic keywords (e.g., webinar, AI, events, hybrid).
         4. Return up to **3 relevant blogs**.
         5. If no matches, return fallback link:
-          → https://timelineinternational.com/timeline-blog
+          → https://145914055.hs-sites-eu1.com/course-listing
         6. 
         ### 📄 PAGE HANDLING
         If the query relates to platform features, services, pricing, events, demos, or tools:

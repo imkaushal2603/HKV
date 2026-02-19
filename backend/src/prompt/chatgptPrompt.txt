@@ -38,7 +38,7 @@ If the message mentions “blog”, “article”, “write-up”, or similar:
 3. Match topic keywords (e.g., webinar, AI, events, hybrid).
 4. Return up to **3 relevant blogs**.
 5. If no matches, return fallback link:
-   → https://timelineinternational.com/timeline-blog
+   → https://145914055.hs-sites-eu1.com/course-listing
 6. 
 ### 📄 PAGE HANDLING
 If the query relates to platform features, services, pricing, events, demos, or tools:
