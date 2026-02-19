@@ -8,29 +8,33 @@ async function fetchPagesFromHubSpot() {
     });
 
     let dataResponse = response.data.results || [];
-    console.log(dataResponse)
-    return dataResponse;
-  } catch (error) {
-    console.error("❌ Failed to fetch pages from HubSpot:", error.message);
-  }
-}
-
-async function fetchBlogsFromHubSpot() {
-  console.log("🔄 Fetching blogs from HubSpot...");
-  try {
-    const response = await axios.get("https://api.hubapi.com/cms/v3/blogs/posts?property=name,slug,language,htmlTitle,publishDate&limit=1000", {
-      headers: { Authorization: `Bearer ${process.env.HUBSPOT_ACCESS_TOKEN}` },
-    });
-
-    let dataResponse = response.data.results || [];
 
     return dataResponse;
   } catch (error) {
     console.error("❌ Failed to fetch pages from HubSpot:", error.message);
   }
 }
+
+// async function fetchBlogsFromHubSpot() {
+//   console.log("🔄 Fetching blogs from HubSpot...");
+//   try {
+//     const response = await axios.get("https://api.hubapi.com/cms/v3/blogs/posts?property=name,slug,language,htmlTitle,publishDate&limit=1000", {
+//       headers: { Authorization: `Bearer ${process.env.HUBSPOT_ACCESS_TOKEN}` },
+//     });
+
+//     let dataResponse = response.data.results || [];
+
+//     return dataResponse;
+//   } catch (error) {
+//     console.error("❌ Failed to fetch pages from HubSpot:", error.message);
+//   }
+// }
+
+// module.exports = {
+//     fetchPagesFromHubSpot,
+//     fetchBlogsFromHubSpot
+// };
 
 module.exports = {
-    fetchPagesFromHubSpot,
-    fetchBlogsFromHubSpot
+    fetchPagesFromHubSpot
 };

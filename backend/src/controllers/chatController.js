@@ -11,15 +11,15 @@ const { fetchPagesFromHubSpot, fetchBlogsFromHubSpot } = require("./pagesControl
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 let pagesJSON = [];
-let blogsJSON = [];
+// let blogsJSON = [];
 
 async function refreshCaches() {
   try {
     const pages = await fetchPagesFromHubSpot();
     pagesJSON = pages || [];
 
-    const blogs = await fetchBlogsFromHubSpot();
-    blogsJSON = blogs || [];
+    // const blogs = await fetchBlogsFromHubSpot();
+    // blogsJSON = blogs || [];
   } catch (err) {
     console.error("❌ Failed to refresh caches:", err.message);
   }
@@ -41,7 +41,7 @@ function loadSystemPrompt(targetLanguage) {
         return content
           .replace(/{targetLanguage}/g, targetLanguage)
           .replace("{pagesJSON}", JSON.stringify(pagesJSON))
-          .replace("{blogsJSON}", JSON.stringify(blogsJSON));
+          // .replace("{blogsJSON}", JSON.stringify(blogsJSON));
       } else {
         console.warn("⚠️ chatgptPrompt.txt is EMPTY — switching to fallback prompt.");
         return `ROLE:
@@ -54,7 +54,7 @@ INPUTS:
 ---
 
 OBJECTIVES:
-1. **Warm Welcome First**: Always start your first response by warmly welcoming the user to HKV and introducing yourself as their educational assistant.
+1. **Warm Welcome First**: Always start your first response by warmly welcoming the user to HKV and introducing yourself as their educational assistant and don't include anything else while introducing yourself. **No Courses** and **No other pages** - **Very Very Important**
 2. **Focus on Courses**: Prioritize recommending courses found in {pagesJSON}. If a user asks for "courses" generally, always include: https://145914055.hs-sites-eu1.com/all-courses.
 3. **Lead Generation**: Only ask for **name** and **email** if the visitor asks about something OUTSIDE the provided course context (e.g., custom partnerships, specific enrollment help, or topics not found in {pagesJSON}).
 
@@ -63,8 +63,9 @@ OBJECTIVES:
 LOGIC:
 
 ### 🎓 COURSE & CONTENT HANDLING
-- Search **{pagesJSON}** for titles or descriptions matching the user's interest. 
-- Always prioritize the **All Courses** or **Course Listing** pages for general inquiries.
+- Always prioritize the **All Courses** page for general inquiries.
+- When Asked for **Courses** then go inside https://145914055.hs-sites-eu1.com/all-courses and then show some courses listed on this page **Very Very Important**.
+- **Note it** If any course doesn't include **/all-courses** then that is not course and must be avoided.
 - Maximum 3 course links per response.
 - If the user's query has NO clear match in the provided data:
   - Politely state you can't find that specific info.
@@ -144,12 +145,12 @@ exports.handleChatRequest = async (req, res) => {
     let systemPrompt = loadSystemPrompt(targetLanguage);
 
     const finalPages = pagesJSON.length > 0 ? JSON.stringify(pagesJSON) : "[]";
-    const finalBlogs = blogsJSON.length > 0 ? JSON.stringify(blogsJSON) : "[]";
+    // const finalBlogs = blogsJSON.length > 0 ? JSON.stringify(blogsJSON) : "[]";
 
     systemPrompt = systemPrompt
       .replace(/{targetLanguage}/g, targetLanguage)
       .replace("{pagesJSON}", finalPages)
-      .replace("{blogsJSON}", finalBlogs);
+      // .replace("{blogsJSON}", finalBlogs);
 
     // Step 3️⃣ — Prepare messages for GPT
     const cleanHistory = Array.isArray(chatHistory)

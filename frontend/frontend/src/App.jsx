@@ -81,7 +81,8 @@ function App() {
   const formatMessage = (text) => {
     const formatted = text
       .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-      .replace(/(\d+\.\s)(.*?)(?=\d+\.|$)/gs, (match, num, content) => {
+      .replace(/(?:^|\n)(\d+)\.\s([\s\S]*?)(?=\n\d+\.\s|$)/g, (match, num, content) => {
+        const linkMatch = content.match(/\[(.*?)\]\((.*?)\)/);
         return `<div class="feature-item"><div class="feature-number">${num.trim()}</div><div class="feature-text">${content.trim()}</div></div>`;
       });
     return formatted;
@@ -100,7 +101,7 @@ function App() {
         body: JSON.stringify({
           message: userDetails,
           language: navigator.language || "en-US",
-          websiteUrl: "https://timelineinternational.com",
+          websiteUrl: "https://145914055.hs-sites-eu1.com/",
           chatHistory: messages.map((m) => ({
             role: m.sender === "user" ? "user" : "assistant",
             content: m.text,
