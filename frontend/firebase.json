@@ -1,7 +1,7 @@
 {
   "hosting": {
-    "site": "timeline-chatbot",
-    "public": "frontend/dist",
+    "site": "hkv-frontend",
+    "public": "frontend/frontend/dist",
     "ignore": [
       "firebase.json",
       "**/.*",
