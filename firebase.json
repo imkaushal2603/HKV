@@ -1,7 +1,7 @@
 {
   "hosting": {
     "site": "hkv-frontend",
-    "public": "frontend/frontend/dist",
+    "public": "frontend/dist",
     "ignore": [
       "firebase.json",
       "**/.*",
