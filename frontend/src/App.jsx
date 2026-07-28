@@ -79,13 +79,30 @@ function App() {
   };
 
   const formatMessage = (text) => {
-    const formatted = text
+    return text
       .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-      .replace(/(?:^|\n)(\d+)\.\s([\s\S]*?)(?=\n\d+\.\s|$)/g, (match, num, content) => {
-        const linkMatch = content.match(/\[(.*?)\]\((.*?)\)/);
-        return `<div class="feature-item"><div class="feature-number">${num.trim()}</div><div class="feature-text">${content.trim()}</div></div>`;
-      });
-    return formatted;
+
+      .replace(
+        /\[(.*?)\]\((https?:\/\/[^\s)]+)\)/g,
+        `
+      <div class="link-header inline-link">
+        <a href="$2" target="_blank" rel="noopener noreferrer">
+          $1
+        </a>
+      </div>
+      `
+      )
+
+      .replace(
+        /(?:^|\n)(\d+)\.\s([\s\S]*?)(?=\n\d+\.\s|$)/g,
+        (match, num, content) => `
+        <div class="feature-item">
+          <div class="feature-number">${num}</div>
+          <div class="feature-text">${content.trim()}</div>
+        </div>
+      `
+      )
+      ;
   };
 
   const submitContactForm = async () => {
@@ -193,6 +210,7 @@ function App() {
           </p>
 
           <div className="chat-messages" ref={messagesContainerRef}>
+            {console.log(messages)}
             {messages.map((msg, i) => (
               <div
                 key={i}
