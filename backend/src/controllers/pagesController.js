@@ -3,7 +3,7 @@ const axios = require("axios");
 async function fetchPagesFromHubSpot() {
   console.log("🔄 Fetching pages from HubSpot...");
   try {
-    const response = await axios.get("https://api.hubapi.com/cms/v3/pages/site-pages?state__in=PUBLISHED_OR_SCHEDULED&property=name,slug,language,htmlTitle", {
+    const response = await axios.get("https://api.hubapi.com/cms/v3/pages/site-pages?state__in=PUBLISHED_OR_SCHEDULED&property=name,slug,language,htmlTitle,url,layoutSections", {
       headers: { Authorization: `Bearer ${process.env.HUBSPOT_ACCESS_TOKEN}` },
     });
 
