@@ -23,8 +23,8 @@ app.get("/", (req, res) => {
 });
 
 // start server
-// app.listen(PORT, () => {
-//   console.log(`🚀 Server listening on port: ${PORT}`);
-// });
+app.listen(PORT, () => {
+  console.log(`🚀 Server listening on port: ${PORT}`);
+});
 
-exports.api = functions.https.onRequest(app);
+// exports.api = functions.https.onRequest(app);
