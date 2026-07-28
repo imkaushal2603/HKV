@@ -7,6 +7,7 @@ const { URL } = require("url");
 const fs = require("fs");
 const path = require("path");
 const { fetchPagesFromHubSpot, fetchBlogsFromHubSpot } = require("./pagesController");
+const { getNextIntakeData } = require("./hubdbController");
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
@@ -41,7 +42,7 @@ function loadSystemPrompt(targetLanguage) {
         return content
           .replace(/{targetLanguage}/g, targetLanguage)
           .replace("{pagesJSON}", JSON.stringify(pagesJSON))
-          // .replace("{blogsJSON}", JSON.stringify(blogsJSON));
+        // .replace("{blogsJSON}", JSON.stringify(blogsJSON));
       } else {
         console.warn("⚠️ chatgptPrompt.txt is EMPTY — switching to fallback prompt.");
         return `ROLE:
@@ -102,6 +103,10 @@ STYLE:
 exports.handleChatRequest = async (req, res) => {
   try {
     const { message, language, websiteUrl, chatHistory } = req.body;
+
+    const matchedCourses = await getNextIntakeData(message);
+    console.log(matchedCourses);
+
     if (!message) return res.status(400).json({ error: "Missing message" });
 
     let targetLanguage = (language || "en").split(/[-_]/)[0].toLowerCase();
@@ -150,7 +155,7 @@ exports.handleChatRequest = async (req, res) => {
     systemPrompt = systemPrompt
       .replace(/{targetLanguage}/g, targetLanguage)
       .replace("{pagesJSON}", finalPages)
-      // .replace("{blogsJSON}", finalBlogs);
+    // .replace("{blogsJSON}", finalBlogs);
 
     // Step 3️⃣ — Prepare messages for GPT
     const cleanHistory = Array.isArray(chatHistory)
