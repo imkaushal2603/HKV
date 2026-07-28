@@ -314,9 +314,6 @@ exports.handleChatRequest = async (req, res) => {
 
     let allCourses = await getNextIntakeData(message);
 
-    if (!allCourses || allCourses.length === 0) {
-      allCourses = await getNextIntakeData();
-    }
     if (!message) return res.status(400).json({ error: "Missing message" });
 
     let targetLanguage = (language || "en").split(/[-_]/)[0].toLowerCase();
