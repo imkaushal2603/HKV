@@ -26,7 +26,10 @@ const getNames = (items = []) => items.map(item => item.name).filter(Boolean);
 function matchesCourse(course, searchText = "") {
     if (!searchText) return true;
 
-    const search = searchText.trim().toLowerCase();
+    const words = searchText
+        .toLowerCase()
+        .split(/\W+/)
+        .filter(w => w.length > 2);
 
     const fields = [
         course.title,
@@ -43,22 +46,20 @@ function matchesCourse(course, searchText = "") {
         course.date,
         course.timeHours,
         course.registerUrl,
-
         ...course.course_tag,
         ...course.more,
         ...course.branchName,
         ...course.nextIntake,
         ...course.detailsTabList,
         ...course.authors,
-    ];
+    ].map(f => (f || "").toString().toLowerCase());
 
-    return fields.some(field =>
-        field &&
-        field.toString().toLowerCase().includes(search)
+    return words.some(word =>
+        fields.some(field => field.includes(word))
     );
 }
 
-async function getNextIntakeData(searchText = "Dipl") {
+async function getNextIntakeData(searchText = "") {
     try {
         const data = await getRowByExport();
 
