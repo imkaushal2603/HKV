@@ -72,7 +72,7 @@ async function getNextIntakeData(searchText = "Dipl") {
 
             const course = {
                 rowId: row.id,
-                url: row.path,
+                url: `https://145914055.hs-sites-eu1.com/all-courses/${row.path}`,
                 course_tag: getNames(row.values.course_tag),
                 level: row.values.level?.label ?? null,
                 format: row.values.course_format?.label ?? null,
