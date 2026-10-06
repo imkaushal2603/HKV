@@ -26,7 +26,7 @@ async function refreshCaches() {
   }
 }
 
-refreshCaches();
+// refreshCaches();
 setInterval(refreshCaches, 6 * 60 * 60 * 1000);
 
 // === Load system prompt from external file OR use fallback ===

@@ -7,7 +7,7 @@ const chatRoutes = require("./routes/chatRoutes");
 const promptRoutes = require("./routes/promptRoutes");
 
 const app = express();
-const PORT = process.env.PORT || 10000; // ✅ fallback port for local/dev
+// const PORT = process.env.PORT || 10000; // ✅ fallback port for local/dev
 
 // middleware
 app.use(cors());
@@ -23,8 +23,8 @@ app.get("/", (req, res) => {
 });
 
 // start server
-app.listen(PORT, () => {
-  console.log(`🚀 Server listening on port: ${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`🚀 Server listening on port: ${PORT}`);
+// });
 
-// exports.api = functions.https.onRequest(app);
+exports.api = functions.https.onRequest(app);

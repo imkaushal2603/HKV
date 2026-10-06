@@ -210,7 +210,6 @@ function App() {
           </p>
 
           <div className="chat-messages" ref={messagesContainerRef}>
-            {console.log(messages)}
             {messages.map((msg, i) => (
               <div
                 key={i}

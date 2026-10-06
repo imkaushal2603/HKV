@@ -1,4 +1,9 @@
 {
+  "functions": {
+    "source": "backend",
+    "runtime": "nodejs24"
+
+  },
   "hosting": {
     "site": "hkv-frontend",
     "public": "frontend/dist",
